@@ -196,6 +196,8 @@
           
           /* 3D Model fixed overlay covering screen */
           #three-canvas-container {
+              opacity: 0;
+              transition: opacity 1.8s ease;
               width: 100vw;
               height: 100vh;
               position: fixed;
@@ -304,34 +306,35 @@
         </div>
     </div>
 
-    <!-- Top Navigation Bar -->
-    <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between gap-6 px-6 py-3 rounded-full backdrop-blur-xl border border-outline-variant/20 shadow-lg w-[calc(100%-2rem)] md:w-auto header-bg">
-        <div class="flex items-center gap-6">
-            <a href="#contact" class="bg-primary text-background font-label-sm text-sm px-5 py-2 rounded-full transition-all duration-300 hover:bg-primary/80 shadow-primary-glow font-bold inline-flex items-center justify-center">
-                Hire Me
-            </a>
-            <div class="font-headline-lg text-headline-lg-mobile md:text-title-md font-bold tracking-wider text-primary uppercase select-none">
-                PRABIN KC
-            </div>
+    <!-- Top-left: Name + Hire Me -->
+    <div class="fixed top-6 left-6 z-50 flex flex-col gap-2.5">
+      <span class="font-bold tracking-[0.15em] text-primary uppercase text-xs whitespace-nowrap">PRABIN KC</span>
+      <a href="#contact" class="inline-flex w-fit items-center justify-center whitespace-nowrap bg-primary text-background font-label-sm text-[10px] tracking-widest uppercase font-bold px-3.5 py-1 rounded-full hover:bg-primary/80 transition-colors">
+        Hire Me
+      </a>
+    </div>
+
+    <!-- Top Navigation Bar (center pill) -->
+    <header class="fixed top-5 left-1/2 -translate-x-1/2 z-50">
+      <div class="flex items-center gap-4 px-5 py-2 rounded-full backdrop-blur-xl border border-outline-variant header-bg">
+        <!-- Nav links: hidden on mobile -->
+        <nav class="hidden md:flex items-center gap-5">
+          <a class="font-label-sm text-[11px] tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap" href="#wisdom">Education</a>
+          <a class="font-label-sm text-[11px] tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap" href="#artifacts">Projects</a>
+          <a class="font-label-sm text-[11px] tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap" href="#nairutya">Skills</a>
+          <a class="font-label-sm text-[11px] tracking-widest uppercase text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap" href="#vayu">Experience</a>
+        </nav>
+        <!-- Divider -->
+        <div class="w-px h-3.5 bg-outline-variant shrink-0 hidden md:block"></div>
+        <!-- Theme toggle -->
+        <button id="theme-toggle" class="w-7 h-7 shrink-0 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" aria-label="Toggle theme">
+          <span class="material-symbols-outlined text-[16px]" id="theme-toggle-icon">light_mode</span>
+        </button>
+        <!-- Mobile menu toggle -->
+        <div class="md:hidden text-primary cursor-pointer shrink-0" onclick="toggleMobileMenu()">
+          <span class="material-symbols-outlined text-[18px]" id="menu-icon">menu</span>
         </div>
-        <div class="flex items-center gap-4">
-            <nav class="hidden md:flex items-center gap-8 mr-2">
-                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#wisdom">Education</a>
-                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#artifacts">Projects</a>
-                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#nairutya">Skills</a>
-                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#vayu">Experience</a>
-            </nav>
-            
-            <!-- Theme Toggle Button -->
-            <button id="theme-toggle" class="w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary/10 transition-colors duration-300 focus:outline-none" aria-label="Toggle theme">
-                <span class="material-symbols-outlined text-[20px] transition-transform duration-500" id="theme-toggle-icon">light_mode</span>
-            </button>
-            
-            <!-- Mobile Navigation Menu Toggle -->
-            <div class="md:hidden text-primary cursor-pointer flex items-center" onclick="toggleMobileMenu()">
-                <span class="material-symbols-outlined" id="menu-icon">menu</span>
-            </div>
-        </div>
+      </div>
     </header>
 
     <!-- Mobile Navigation Overlay -->
@@ -360,11 +363,11 @@
                         Hello, I'm Prabin KC. A Computer Science student (GPA 3.78) at Youngstown State University building real things—shipping full clinical SaaS platforms and high-conversion e-commerce architectures by leveraging AI workflows.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#wisdom" class="bg-primary text-background font-label-sm text-label-sm font-bold px-8 py-4 rounded hover:bg-primary/90 transition-colors shadow-primary-glow text-center">
-                            Explore Universe
+                        <a href="#wisdom" class="inline-flex items-center justify-center bg-primary text-background font-label-sm text-[11px] tracking-widest uppercase font-bold px-7 py-3 rounded-full hover:bg-primary/90 transition-colors shadow-primary-glow">
+                          View My Work
                         </a>
-                        <a href="./Prabin_KC_Master_CV.docx" download class="bg-transparent border border-primary text-primary font-label-sm text-label-sm font-bold px-8 py-4 rounded hover:bg-primary/10 transition-colors text-center flex justify-center items-center gap-2">
-                            <span class="material-symbols-outlined text-[18px]">download</span> Download Resume
+                        <a href="./Prabin_KC_Master_CV.docx" download class="inline-flex items-center justify-center gap-2 bg-transparent border border-primary text-primary font-label-sm text-[11px] tracking-widest uppercase font-bold px-7 py-3 rounded-full hover:bg-primary/10 transition-colors backdrop-blur-sm">
+                          <span class="material-symbols-outlined text-[16px]">download</span> Download Resume
                         </a>
                     </div>
                 </div>
@@ -653,42 +656,59 @@
             </div>
 
             <!-- Part B: Contact Gateway Form -->
-            <div id="contact">
-                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 border-b border-outline-variant/10 pb-4">
-                    <div>
-                        <h3 class="font-title-md text-[22px] font-bold text-on-background">Get In Touch</h3>
-                        <p class="font-label-sm text-label-sm text-tertiary tracking-widest uppercase mt-1">
+            <div id="contact" class="mt-section-gap">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                    <!-- Left: Section header -->
+                    <div class="md:col-span-4 flex flex-col justify-start">
+                        <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-4">Open Channel</h2>
+                        <p class="font-label-sm text-label-sm text-primary tracking-widest uppercase mb-6 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-secondary inline-block animate-pulse"></span>
                             Establish Connection
                         </p>
+                        <p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-8">
+                            Ready to collaborate on AI systems, data products, or engineering challenges. Let's build something that matters.
+                        </p>
+                        <div class="flex flex-col gap-4">
+                            <a href="mailto:prabinkhadka1396@gmail.com" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">contact_page</span>
+                                <span class="font-label-sm text-[10px] tracking-widest uppercase">prabinkhadka1396@gmail.com</span>
+                            </a>
+                            <a href="https://github.com/MLucifer13" target="_blank" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">code</span>
+                                <span class="font-label-sm text-[10px] tracking-widest uppercase">GitHub</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/prabinkc13/" target="_blank" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">group</span>
+                                <span class="font-label-sm text-[10px] tracking-widest uppercase">LinkedIn</span>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="glass-card p-8 rounded-xl">
-                    <form class="space-y-6" onsubmit="event.preventDefault(); alert('Message transmitted across cosmic frequencies.');">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block font-label-sm text-label-sm text-primary uppercase mb-2">Your Name</label>
-                                <input type="text" class="w-full input-bg border-b border-outline-variant/30 focus:border-primary text-on-background px-4 py-3 outline-none transition-colors rounded-none" placeholder="e.g. Hiring Manager" required>
-                            </div>
-                            <div>
-                                <label class="block font-label-sm text-label-sm text-primary uppercase mb-2">Email Address</label>
-                                <input type="email" class="w-full input-bg border-b border-outline-variant/30 focus:border-primary text-on-background px-4 py-3 outline-none transition-colors rounded-none" placeholder="e.g. partner@agency.com" required>
-                            </div>
+                    <!-- Right: Form -->
+                    <div class="md:col-span-8">
+                        <div class="glass-card p-8 rounded-xl">
+                            <form class="space-y-6" onsubmit="event.preventDefault(); alert('Message transmitted across cosmic frequencies.');">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block font-label-sm text-label-sm text-primary uppercase mb-2">Your Name</label>
+                                        <input type="text" class="w-full input-bg border-b border-outline-variant/30 focus:border-primary text-on-background px-4 py-3 outline-none transition-colors rounded-none" placeholder="e.g. Hiring Manager" required>
+                                    </div>
+                                    <div>
+                                        <label class="block font-label-sm text-label-sm text-primary uppercase mb-2">Email Address</label>
+                                        <input type="email" class="w-full input-bg border-b border-outline-variant/30 focus:border-primary text-on-background px-4 py-3 outline-none transition-colors rounded-none" placeholder="e.g. partner@agency.com" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block font-label-sm text-label-sm text-primary uppercase mb-2">Project Details / Message</label>
+                                    <textarea rows="4" class="w-full input-bg border-b border-outline-variant/30 focus:border-primary text-on-background px-4 py-3 outline-none transition-colors rounded-none" placeholder="Describe your project, role, or opportunity..." required></textarea>
+                                </div>
+                                <div class="pt-2">
+                                    <button type="submit" class="bg-primary text-background font-label-sm text-label-sm font-bold px-8 py-3 rounded-full hover:bg-primary/90 transition-all shadow-primary-glow">
+                                        Transmit Signal
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                        <div>
-                            <label class="block font-label-sm text-label-sm text-primary uppercase mb-2">Project Details / Message</label>
-                            <textarea rows="4" class="w-full input-bg border-b border-outline-variant/30 focus:border-primary text-on-background px-4 py-3 outline-none transition-colors rounded-none" placeholder="Describe your project, role, or opportunity..." required></textarea>
-                        </div>
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-4">
-                            <button type="submit" class="bg-primary text-background font-label-sm text-label-sm font-bold px-8 py-4 rounded hover:bg-primary/90 transition-all shadow-primary-glow">
-                                Transmit Signal
-                            </button>
-                            <div class="flex gap-6 items-center">
-                                <a href="mailto:prabinkhadka1396@gmail.com" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5"><span class="material-symbols-outlined text-[20px]">contact_page</span> <span class="font-label-sm text-[10px] tracking-widest uppercase">Email</span></a>
-                                <a href="https://github.com/MLucifer13" target="_blank" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5"><span class="material-symbols-outlined text-[20px]">code</span> <span class="font-label-sm text-[10px] tracking-widest uppercase">Github</span></a>
-                                <a href="https://www.linkedin.com/in/prabinkc13/" target="_blank" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5"><span class="material-symbols-outlined text-[20px]">group</span> <span class="font-label-sm text-[10px] tracking-widest uppercase">LinkedIn</span></a>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1179,6 +1199,15 @@
                 card.addEventListener('mouseleave', () => delete card.dataset.hovered);
             });
 
+            // Query glow buttons and header once
+            const glowButtons = document.querySelectorAll('#hero a, header a[href="#contact"], header');
+
+            // Set up hover tracking attributes once for glow buttons and header
+            glowButtons.forEach(btn => {
+                btn.addEventListener('mouseenter', () => btn.dataset.hovered = 'true');
+                btn.addEventListener('mouseleave', () => delete btn.dataset.hovered);
+            });
+
             // Main rendering animation loop
             let time = 0;
             let lastThemeWasDark = null;
@@ -1318,6 +1347,45 @@
                     card.style.boxShadow = `${offsetX}px ${offsetY}px ${blur}px ${spread}px ${color}`;
                 });
 
+                // Apply dynamic sun-glow tracking box-shadow to buttons and header
+                glowButtons.forEach(btn => {
+                    const rect = btn.getBoundingClientRect();
+                    const sunXRelative = sunScreenX - rect.left;
+                    const sunYRelative = sunScreenY - rect.top;
+                    btn.style.setProperty('--sun-x', `${sunXRelative}px`);
+                    btn.style.setProperty('--sun-y', `${sunYRelative}px`);
+
+                    const btnCenterX = rect.left + rect.width / 2;
+                    const btnCenterY = rect.top + rect.height / 2;
+
+                    const dx = sunScreenX - btnCenterX;
+                    const dy = sunScreenY - btnCenterY;
+
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const maxDist = 600;
+                    const intensity = Math.max(0, 1 - dist / maxDist);
+                    if (intensity < 0.01) {
+                        btn.style.boxShadow = '';
+                        return;
+                    }
+
+                    const nx = dx / dist;
+                    const ny = dy / dist;
+                    const offsetX = nx * 6 * intensity;
+                    const offsetY = ny * 6 * intensity;
+                    
+                    const isHovered = btn.dataset.hovered === 'true';
+                    const alpha = isHovered
+                        ? (0.45 + 0.35 * intensity).toFixed(2)
+                        : (0.10 + 0.20 * intensity).toFixed(2);
+                    const blur = isHovered ? (24 + 14 * intensity) : (12 + 8 * intensity);
+                    const spread = -4;
+
+                    const color = `rgba(${Math.round(state.r)}, ${Math.round(state.g)}, ${Math.round(state.b)}, ${alpha})`;
+
+                    btn.style.boxShadow = `${offsetX}px ${offsetY}px ${blur}px ${spread}px ${color}`;
+                });
+
                 // Maintain constant scale across sections with a tiny organic pulse (breathe)
                 const pulse = 1.0 + Math.sin(time * 2.0) * 0.025;
                 const mobileScaleFactor = isMobile ? 0.75 : 1.0;
@@ -1338,6 +1406,21 @@
 
                 renderer.render(scene, camera);
             }
+            // Pre-initialize sun to its t=0 curve position so it doesn't pop on frame 1
+            const initBounds = getVisibleBounds();
+            const initCurve = orbitCurve.getPointAt(0);
+            sunGroup.position.set(
+                initCurve.x * initBounds.width,
+                initCurve.y * initBounds.height,
+                initCurve.z
+            );
+            renderer.render(scene, camera);
+
+            // Fade the canvas in after position is settled
+            requestAnimationFrame(() => {
+                threeContainer.style.opacity = '1';
+            });
+
             animate();
 
             // Resize viewport handler
