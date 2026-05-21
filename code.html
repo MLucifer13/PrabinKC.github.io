@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <script>
+        // Early theme initialization to prevent flash of dark mode
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light' || (!savedTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+                document.documentElement.classList.remove('dark');
+            } else {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Prabin KC - AI-Native Builder &amp; Data Analyst</title>
+    <!-- Tailwind CSS with Forms and Container Queries -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "var(--color-text-muted)",
+                      "on-primary-fixed-variant": "#544600",
+                      "on-secondary-fixed-variant": "#920703",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-lowest": "var(--color-surface-lowest)",
+                      "surface-container-low": "#1f1b10",
+                      "on-error": "#690005",
+                      "on-tertiary-fixed-variant": "#004f54",
+                      "on-primary-container": "#705e00",
+                      "on-secondary": "#690000",
+                      "outline-variant": "var(--color-border-subtle)",
+                      "surface-dim": "var(--color-bg-base)",
+                      "on-secondary-fixed": "#410000",
+                      "surface": "var(--color-bg-base)",
+                      "error-container": "#93000a",
+                      "surface-container-highest": "#393528",
+                      "tertiary-fixed": "#79f5ff",
+                      "inverse-surface": "var(--color-text-base)",
+                      "on-tertiary-fixed": "#002022",
+                      "tertiary-fixed-dim": "#00dbe8",
+                      "on-tertiary-container": "#006a70",
+                      "secondary-fixed-dim": "#ffb4a8",
+                      "secondary-container": "#920703",
+                      "on-tertiary": "#00363a",
+                      "surface-container": "var(--color-surface-container)",
+                      "background": "var(--color-bg-base)",
+                      "tertiary": "var(--color-tertiary-accent)",
+                      "primary-container": "#ffd700",
+                      "primary": "var(--color-primary-accent)",
+                      "on-secondary-container": "#ff9a8a",
+                      "on-primary": "#3a3000",
+                      "tertiary-container": "#00f1ff",
+                      "inverse-on-surface": "#343024",
+                      "on-background": "var(--color-text-base)",
+                      "surface-container-high": "#2e2a1e",
+                      "surface-tint": "#e9c400",
+                      "error": "#ffb4ab",
+                      "on-primary-fixed": "#221b00",
+                      "secondary": "var(--color-secondary-accent)",
+                      "secondary-text": "var(--color-secondary-text)",
+                      "primary-fixed": "#ffe16d",
+                      "primary-fixed-dim": "#e9c400",
+                      "surface-variant": "#393528",
+                      "on-surface": "var(--color-text-base)",
+                      "inverse-primary": "#705d00",
+                      "surface-bright": "#3d392c",
+                      "secondary-fixed": "#ffdad4",
+                      "outline": "#999077"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-desktop": "80px",
+                      "margin-mobile": "24px",
+                      "gutter": "32px",
+                      "container-max": "1440px",
+                      "section-gap": "160px",
+                      "unit": "8px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Geist"],
+                      "label-sm": ["JetBrains Mono"],
+                      "body-lg": ["Geist"],
+                      "headline-lg-mobile": ["Geist"],
+                      "display-xl": ["Geist"],
+                      "body-md": ["Geist"],
+                      "title-md": ["Geist"]
+              },
+              "fontSize": {
+                      "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "display-xl": ["72px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                      "title-md": ["24px", {"lineHeight": "1.4", "letterSpacing": "0em", "fontWeight": "500"}]
+              }
+            }
+          }
+        }
+      </script>
+      <style>
+          :root {
+              /* Google Light Theme Palette */
+              --color-bg-base: #f8f9fa;
+              --color-text-base: #202124;
+              --color-text-muted: #5f6368;
+              --color-surface-lowest: #ffffff;
+              --color-surface-container: #f1f3f4;
+              --color-border-subtle: rgba(0, 0, 0, 0.08);
+              
+              --color-primary-accent: #c59000; /* Vastu Solar Gold (darkened for light background contrast) */
+              --color-primary-shadow: rgba(26, 115, 232, 0.25); /* Google Blue glow for active components */
+              --color-secondary-accent: #920703; /* Vastu Agni Crimson */
+              --color-secondary-text: #920703; /* Vastu Agni Crimson for readable text */
+              --color-tertiary-accent: #007a87; /* Vastu Ishanya Cyan/Teal (darkened for light background contrast) */
+              
+              /* Custom container opacity states */
+              --color-hud-bg: rgba(255, 255, 255, 0.85);
+              --color-header-bg: rgba(255, 255, 255, 0.7);
+              --color-mobile-menu-bg: rgba(255, 255, 255, 0.95);
+              --color-input-bg: rgba(241, 243, 244, 0.8);
+              --color-footer-bg: rgba(241, 243, 244, 0.95);
+              --color-icon-bg: rgba(26, 115, 232, 0.08);
+              
+              /* Glow settings for light mode (Vastu Solar Gold aura) */
+              --card-glow-radial: radial-gradient(320px circle at var(--sun-x, 0px) var(--sun-y, 0px), rgba(255, 170, 0, 0.07), transparent 75%);
+              --card-bg-gradient: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75));
+              --card-border-radial: radial-gradient(350px circle at var(--sun-x, 0px) var(--sun-y, 0px), rgba(255, 170, 0, 0.45) 0%, rgba(255, 215, 0, 0.15) 50%, rgba(255, 255, 255, 0.04) 100%);
+              --card-shadow-base: 0 4px 20px -2px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+              --card-shadow-hover: 0 16px 32px -8px rgba(255, 170, 0, 0.18), 0 0 0 1px rgba(255, 170, 0, 0.06);
+          }
+
+          html.dark {
+              /* Dark Theme Palette (Original) */
+              --color-bg-base: #161308;
+              --color-text-base: #eae2cf;
+              --color-text-muted: #d0c6ab;
+              --color-surface-lowest: #110e05;
+              --color-surface-container: #231f14;
+              --color-border-subtle: rgba(255, 255, 255, 0.05);
+              
+              --color-primary-accent: #FFD700; /* Gold */
+              --color-primary-shadow: rgba(255, 215, 0, 0.3);
+              --color-secondary-accent: #920703; /* Dark Crimson */
+              --color-secondary-text: #ffb4a8; /* Light Pinkish Red */
+              --color-tertiary-accent: #79f5ff; /* Cyan */
+              
+              /* Custom container opacity states */
+              --color-hud-bg: rgba(22, 19, 8, 0.8);
+              --color-header-bg: rgba(22, 19, 8, 0.4);
+              --color-mobile-menu-bg: rgba(22, 19, 8, 0.95);
+              --color-input-bg: rgba(17, 14, 5, 0.6);
+              --color-footer-bg: rgba(17, 14, 5, 0.90);
+              --color-icon-bg: rgba(22, 19, 8, 0.6);
+              
+              /* Glow settings for dark mode */
+              --card-glow-radial: radial-gradient(320px circle at var(--sun-x, 0px) var(--sun-y, 0px), rgba(255, 215, 0, 0.06), transparent 75%);
+              --card-bg-gradient: linear-gradient(rgba(35, 31, 20, 0.45), rgba(35, 31, 20, 0.45));
+              --card-border-radial: radial-gradient(350px circle at var(--sun-x, 0px) var(--sun-y, 0px), rgba(255, 170, 0, 0.4) 0%, rgba(255, 215, 0, 0.12) 50%, rgba(255, 255, 255, 0.06) 100%);
+              --card-shadow-base: none;
+              --card-shadow-hover: 0 12px 40px -12px rgba(255, 215, 0, 0.15);
+          }
+
+          html {
+              scroll-behavior: smooth;
+          }
+          body {
+              background-color: var(--color-bg-base);
+              color: var(--color-text-base);
+              overflow-x: hidden;
+              font-family: 'Geist', sans-serif;
+              transition: background-color 0.4s ease, color 0.4s ease;
+          }
+          .starfield {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100vw;
+              height: 100vh;
+              z-index: -2;
+              pointer-events: none;
+          }
+          
+          /* 3D Model fixed overlay covering screen */
+          #three-canvas-container {
+              width: 100vw;
+              height: 100vh;
+              position: fixed;
+              left: 0;
+              top: 0;
+              z-index: -1; /* Placed behind content text but on top of starfield */
+              pointer-events: none;
+          }
+
+          .glass-card {
+              background: 
+                  var(--card-glow-radial) padding-box,
+                  var(--card-bg-gradient) padding-box,
+                  var(--card-border-radial) border-box;
+              border: 1px solid transparent;
+              backdrop-filter: blur(24px);
+              -webkit-backdrop-filter: blur(24px);
+              position: relative;
+              box-shadow: var(--card-shadow-base);
+              transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease;
+          }
+          .glass-card::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 30%;
+              height: 1px;
+              background: linear-gradient(90deg, var(--color-primary-accent), transparent);
+              opacity: 0.2;
+              transition: background 0.4s ease;
+          }
+          .glass-card:hover {
+              transform: translateY(-4px);
+              box-shadow: var(--card-shadow-hover);
+          }
+
+          /* Custom opacity bg utilities */
+          .hud-bg { background-color: var(--color-hud-bg); transition: background-color 0.4s ease; }
+          .header-bg { background-color: var(--color-header-bg); transition: background-color 0.4s ease; }
+          .mobile-menu-bg { background-color: var(--color-mobile-menu-bg); transition: background-color 0.4s ease; }
+          .input-bg { background-color: var(--color-input-bg); transition: background-color 0.4s ease; }
+          .footer-bg { background-color: var(--color-footer-bg); transition: background-color 0.4s ease; }
+          .icon-bg { background-color: var(--color-icon-bg); transition: background-color 0.4s ease; }
+
+          .shadow-primary-glow {
+              box-shadow: 0 0 12px var(--color-primary-shadow);
+              transition: box-shadow 0.4s ease;
+          }
+
+          .scroll-reveal {
+              opacity: 0;
+              transform: translateY(30px);
+              transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .scroll-reveal.is-visible {
+              opacity: 1;
+              transform: translateY(0);
+          }
+
+          @keyframes float {
+              0% { transform: translateY(0px); }
+              50% { transform: translateY(-8px); }
+              100% { transform: translateY(0px); }
+          }
+          .floating {
+              animation: float 6s ease-in-out infinite;
+          }
+      </style>
+      <!-- Three.js and GLTFLoader -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body class="antialiased min-h-screen font-body-lg text-on-background">
+    
+    <!-- Starfield Background Canvas -->
+    <canvas class="starfield" id="starfieldCanvas"></canvas>
+    
+    <!-- Fixed WebGL 3D Sun Layer -->
+    <div id="three-canvas-container"></div>
+
+    <!-- Fixed Telemetry HUD (Top Right on Mobile, Mid Right on Desktop) -->
+    <div class="fixed bottom-6 right-6 z-40 md:bottom-8 md:right-8">
+        <div class="glass-card p-4 rounded-xl flex items-center gap-4 border border-primary/20 hud-bg backdrop-blur-xl max-w-[280px] md:max-w-xs transition-all duration-500 hover:border-primary/40">
+            <!-- Rotating HUD Dial -->
+            <div class="relative w-12 h-12 flex-shrink-0 flex items-center justify-center border border-dashed border-primary/30 rounded-full" id="telemetry-hud">
+                <!-- Compass needle -->
+                <div class="absolute w-0.5 h-10 bg-gradient-to-t from-transparent via-primary to-primary rounded-full origin-center transform rotate-0 transition-transform duration-700 ease-out" id="compass-needle"></div>
+                <!-- Compass center point -->
+                <div class="w-2.5 h-2.5 rounded-full bg-secondary border border-primary z-10 shadow-[0_0_8px_var(--color-primary-accent)]"></div>
+                <!-- Cardinal indicators -->
+                <span class="absolute top-0.5 text-[7px] font-bold text-primary tracking-tighter">N</span>
+                <span class="absolute bottom-0.5 text-[7px] font-bold text-on-surface-variant/50">S</span>
+                <span class="absolute right-0.5 text-[7px] font-bold text-on-surface-variant/50">E</span>
+                <span class="absolute left-0.5 text-[7px] font-bold text-on-surface-variant/50">W</span>
+            </div>
+            <!-- Telemetry information -->
+            <div class="flex flex-col select-none">
+                <div class="flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-primary inline-block animate-pulse"></span>
+                    <div class="font-label-sm text-[10px] tracking-widest text-primary uppercase font-bold" id="vastu-direction-name">Intro</div>
+                </div>
+                <div class="font-body-md text-[12px] text-on-surface-variant font-medium leading-normal mt-0.5" id="vastu-element-name">AI-Native Builder</div>
+                <div class="font-body-md text-[10px] text-on-surface-variant/60 leading-tight mt-0.5" id="vastu-direction-desc">Prabin KC: YSU Computer Science</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between gap-6 px-6 py-3 rounded-full backdrop-blur-xl border border-outline-variant/20 shadow-lg w-[calc(100%-2rem)] md:w-auto header-bg">
+        <div class="flex items-center gap-6">
+            <a href="#contact" class="bg-primary text-background font-label-sm text-sm px-5 py-2 rounded-full transition-all duration-300 hover:bg-primary/80 shadow-primary-glow font-bold inline-flex items-center justify-center">
+                Hire Me
+            </a>
+            <div class="font-headline-lg text-headline-lg-mobile md:text-title-md font-bold tracking-wider text-primary uppercase select-none">
+                PRABIN KC
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <nav class="hidden md:flex items-center gap-8 mr-2">
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#wisdom">Education</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#artifacts">Projects</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#nairutya">Skills</a>
+                <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#vayu">Experience</a>
+            </nav>
+            
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle" class="w-10 h-10 rounded-full flex items-center justify-center text-primary hover:bg-primary/10 transition-colors duration-300 focus:outline-none" aria-label="Toggle theme">
+                <span class="material-symbols-outlined text-[20px] transition-transform duration-500" id="theme-toggle-icon">light_mode</span>
+            </button>
+            
+            <!-- Mobile Navigation Menu Toggle -->
+            <div class="md:hidden text-primary cursor-pointer flex items-center" onclick="toggleMobileMenu()">
+                <span class="material-symbols-outlined" id="menu-icon">menu</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 mobile-menu-bg backdrop-blur-2xl z-40 flex flex-col items-center justify-center gap-8 translate-x-full transition-transform duration-500 md:hidden">
+        <a class="font-headline-lg text-headline-lg-mobile text-primary uppercase" href="#wisdom" onclick="toggleMobileMenu()">Education</a>
+        <a class="font-headline-lg text-headline-lg-mobile text-primary uppercase" href="#artifacts" onclick="toggleMobileMenu()">Projects</a>
+        <a class="font-headline-lg text-headline-lg-mobile text-primary uppercase" href="#nairutya" onclick="toggleMobileMenu()">Skills</a>
+        <a class="font-headline-lg text-headline-lg-mobile text-primary uppercase" href="#vayu" onclick="toggleMobileMenu()">Experience</a>
+        <a href="#contact" class="bg-primary text-background font-label-sm text-label-sm px-8 py-3 rounded font-bold" onclick="toggleMobileMenu()">Hire Me</a>
+    </div>
+
+    <!-- Main Container -->
+    <main class="pt-[140px] pb-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop relative">
+        
+        <!-- Hero Section (Brahmasthan/Center-East) -->
+        <section class="relative min-h-[75vh] flex items-center mb-section-gap" id="hero">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter w-full relative z-10">
+                <div class="flex flex-col justify-center">
+                    <div class="font-label-sm text-label-sm text-primary tracking-widest uppercase mb-4">
+                        Developer Portfolio Ingested
+                    </div>
+                    <h1 class="font-display-xl text-[42px] md:text-[64px] font-bold text-on-background leading-none mb-6">
+                        Building scalable <span class="text-primary">AI &amp; Data Systems</span>
+                    </h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mb-10">
+                        Hello, I'm Prabin KC. A Computer Science student (GPA 3.78) at Youngstown State University building real things—shipping full clinical SaaS platforms and high-conversion e-commerce architectures by leveraging AI workflows.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#wisdom" class="bg-primary text-background font-label-sm text-label-sm font-bold px-8 py-4 rounded hover:bg-primary/90 transition-colors shadow-primary-glow text-center">
+                            Explore Universe
+                        </a>
+                        <a href="./Prabin_KC_Master_CV.docx" download class="bg-transparent border border-primary text-primary font-label-sm text-label-sm font-bold px-8 py-4 rounded hover:bg-primary/10 transition-colors text-center flex justify-center items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">download</span> Download Resume
+                        </a>
+                    </div>
+                </div>
+                <!-- Empty spacer columns for the fixed 3D Sun model placement -->
+                <div class="hidden md:block"></div>
+            </div>
+        </section>
+
+        <!-- Mercury Section (Ishanya / North-East - Wisdom & Intellect) -->
+        <section class="mb-section-gap scroll-reveal" id="wisdom">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                <div class="md:col-span-4 flex flex-col justify-start">
+                    <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-4">Academic Credentials</h2>
+                    <p class="font-label-sm text-label-sm text-primary tracking-widest uppercase mb-6 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-secondary inline-block animate-pulse"></span>
+                        Education &amp; Certifications
+                    </p>
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-6">
+                        Academic qualifications, ABET computer science studies, and professional certifications representing core technical foundations.
+                    </p>
+                </div>
+                <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-gutter">
+                    <div class="glass-card p-8 rounded-xl floating" style="animation-delay: 0s;">
+                        <div class="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center mb-6 icon-bg">
+                            <span class="material-symbols-outlined text-primary">school</span>
+                        </div>
+                        <h3 class="font-title-md text-title-md text-on-background mb-2">Academic Core</h3>
+                        <div class="font-label-sm text-[11px] text-primary mb-3 tracking-wider uppercase font-bold">Youngstown State University</div>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-4">
+                            BS in Computer Science (ABET Accredited) with a Minor in Mathematics. Expected graduation: Dec 2027. Cumulative GPA: 3.78/4.0.
+                        </p>
+                        <div class="border-t border-outline-variant/10 pt-3">
+                            <div class="text-[11px] font-bold uppercase tracking-wider text-on-background mb-1.5">Relevant Work:</div>
+                            <p class="text-[12px] text-on-surface-variant/80 font-mono">
+                                Data Structures &amp; Algorithms · Databases · Probability &amp; Statistics · Discrete Mathematics
+                            </p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-8 rounded-xl floating" style="animation-delay: 1s;">
+                        <div class="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center mb-6 icon-bg">
+                            <span class="material-symbols-outlined text-primary">award</span>
+                        </div>
+                        <h3 class="font-title-md text-title-md text-on-background mb-2">Intellectual Seals</h3>
+                        <div class="font-label-sm text-[11px] text-primary mb-3 tracking-wider uppercase font-bold">Certifications</div>
+                        <ul class="font-body-md text-body-md text-on-surface-variant space-y-3">
+                            <li class="flex items-start gap-2">
+                                <span class="text-primary text-[10px] mt-1.5">■</span>
+                                <div>
+                                    <div class="font-bold text-on-background text-[13px]">Harvard CS50</div>
+                                    <div class="text-[11px] text-on-surface-variant/70">Introduction to Computer Science &amp; Python</div>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-primary text-[10px] mt-1.5">■</span>
+                                <div>
+                                    <div class="font-bold text-on-background text-[13px]">DataCamp Career Tracks</div>
+                                    <div class="text-[11px] text-on-surface-variant/70">Data Analyst in Python, SQL &amp; Excel</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fire Section (Agni / South-East - Execution & Projects) -->
+        <section class="relative scroll-reveal mb-section-gap" id="artifacts">
+            <div class="flex justify-between items-end mb-12 border-b border-outline-variant/10 pb-4">
+                <div>
+                    <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background">Featured Projects</h2>
+                    <p class="font-label-sm text-label-sm text-primary tracking-widest uppercase mt-2">
+                        System Execution
+                    </p>
+                </div>
+                <p class="font-label-sm text-label-sm text-secondary-text tracking-widest uppercase hidden md:flex items-center gap-2">
+                    <span class="w-2 h-2 bg-secondary inline-block animate-ping"></span>
+                    Live Deployments
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+                <!-- Project Card 1: Allevia -->
+                <div class="glass-card rounded-xl overflow-hidden group flex flex-col h-full min-h-[460px] floating" style="animation-delay: 0.5s;">
+                    <div class="h-44 w-full bg-surface-container-lowest relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-secondary/20 to-transparent mix-blend-overlay"></div>
+                        <div class="w-full h-full flex items-center justify-center text-outline-variant group-hover:scale-110 transition-transform duration-700">
+                            <span class="material-symbols-outlined text-[64px] text-primary/40 group-hover:text-primary transition-colors">medical_services</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="font-label-sm text-label-sm bg-secondary/10 text-secondary-text px-3 py-1 rounded-full border border-secondary/30">Healthcare SaaS</span>
+                                <a href="https://allevia.cc" target="_blank" class="material-symbols-outlined text-primary opacity-80 hover:opacity-100 transition-opacity">open_in_new</a>
+                            </div>
+                            <h3 class="font-title-md text-title-md text-on-background mb-2">Allevia Intake SaaS</h3>
+                            <p class="font-body-md text-[13px] text-on-surface-variant leading-relaxed mb-4">
+                                Shipped a HIPAA-aligned multi-tenant clinical intake SaaS platform. Features a patient intake kiosk, clinic dashboard, row-level security (RLS) on PostgreSQL, a custom clinical scoring engine, and a RAG AI intake assistant.
+                            </p>
+                        </div>
+                        <div class="font-mono text-[10px] text-primary border-t border-outline-variant/10 pt-3">
+                            React · FastAPI · PostgreSQL · LLMs
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 2: Calm Style -->
+                <div class="glass-card rounded-xl overflow-hidden group flex flex-col h-full min-h-[460px] floating" style="animation-delay: 1.5s;">
+                    <div class="h-44 w-full bg-surface-container-lowest relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent mix-blend-overlay"></div>
+                        <div class="w-full h-full flex items-center justify-center text-outline-variant group-hover:scale-110 transition-transform duration-700">
+                            <span class="material-symbols-outlined text-[64px] text-primary/40 group-hover:text-primary transition-colors">shopping_bag</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="font-label-sm text-label-sm bg-primary/10 text-primary px-3 py-1 rounded-full border border-primary/30">E-Commerce</span>
+                                <a href="https://calmstyle.store" target="_blank" class="material-symbols-outlined text-primary opacity-80 hover:opacity-100 transition-opacity">open_in_new</a>
+                            </div>
+                            <h3 class="font-title-md text-title-md text-on-background mb-2">Calm Style Store</h3>
+                            <p class="font-body-md text-[13px] text-on-surface-variant leading-relaxed mb-4">
+                                Launched an e-commerce brand for sleep headbands in two weeks. Designed custom Shopify Balance theme modifications using CSS, conducted structured market research, and optimized conversion pathways.
+                            </p>
+                        </div>
+                        <div class="font-mono text-[10px] text-primary border-t border-outline-variant/10 pt-3">
+                            Shopify · Custom CSS · Product Analytics
+                        </div>
+                    </div>
+                </div>
+                <!-- Project Card 3: Fault Detection -->
+                <div class="glass-card rounded-xl overflow-hidden group flex flex-col h-full min-h-[460px] floating" style="animation-delay: 2.5s;">
+                    <div class="h-44 w-full bg-surface-container-lowest relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-tertiary/20 to-transparent mix-blend-overlay"></div>
+                        <div class="w-full h-full flex items-center justify-center text-outline-variant group-hover:scale-110 transition-transform duration-700">
+                            <span class="material-symbols-outlined text-[64px] text-primary/40 group-hover:text-primary transition-colors">analytics</span>
+                        </div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="font-label-sm text-label-sm bg-tertiary/10 text-tertiary px-3 py-1 rounded-full border border-tertiary/30">Data Pipeline</span>
+                                <span class="material-symbols-outlined text-on-surface-variant/40">lock</span>
+                            </div>
+                            <h3 class="font-title-md text-title-md text-on-background mb-2">Sensor Fault Pipeline</h3>
+                            <p class="font-body-md text-[13px] text-on-surface-variant leading-relaxed mb-4">
+                                Built an anomaly detection pipeline in Python and SQL for vehicle sensor logs. Leveraged SciPy and NumPy to locate fault patterns and designed automated validation, minimizing manual oversight.
+                            </p>
+                        </div>
+                        <div class="font-mono text-[10px] text-primary border-t border-outline-variant/10 pt-3">
+                            Python · SQL · SciPy · NumPy · Matplotlib
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nairutya Section (South-West - Stability & Skills) -->
+        <section class="mb-section-gap scroll-reveal" id="nairutya">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                <div class="md:col-span-4 flex flex-col justify-start">
+                    <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-4">Core Expertise</h2>
+                    <p class="font-label-sm text-label-sm text-primary tracking-widest uppercase mb-6 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-primary inline-block animate-pulse"></span>
+                        Technical Skills
+                    </p>
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-6">
+                        Grounded database design, clean software development, and validation pipelines for stable runtime operations.
+                    </p>
+                </div>
+                <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-gutter">
+                    <!-- AI & Software Card -->
+                    <div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-title-md text-[18px] text-on-background mb-4 border-b border-outline-variant/10 pb-2 font-bold tracking-wide">AI &amp; Engineering</h3>
+                            <ul class="font-body-md text-body-md text-on-surface-variant space-y-3 font-medium text-[13px]">
+                                <li class="flex items-center gap-2"><span class="text-primary text-[10px]">■</span> Claude &amp; GPT-4</li>
+                                <li class="flex items-center gap-2"><span class="text-primary text-[10px]">■</span> RAG Pipelines</li>
+                                <li class="flex items-center gap-2"><span class="text-primary text-[10px]">■</span> Python &amp; JavaScript</li>
+                                <li class="flex items-center gap-2"><span class="text-primary text-[10px]">■</span> React &amp; FastAPI</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Data & Databases Card -->
+                    <div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-title-md text-[18px] text-on-background mb-4 border-b border-outline-variant/10 pb-2 font-bold tracking-wide">Data Systems</h3>
+                            <ul class="font-body-md text-body-md text-on-surface-variant space-y-3 font-medium text-[13px]">
+                                <li class="flex items-center gap-2"><span class="text-secondary-text text-[10px]">■</span> SQL / PostgreSQL</li>
+                                <li class="flex items-center gap-2"><span class="text-secondary-text text-[10px]">■</span> Pandas &amp; NumPy</li>
+                                <li class="flex items-center gap-2"><span class="text-secondary-text text-[10px]">■</span> ETL / SciPy</li>
+                                <li class="flex items-center gap-2"><span class="text-secondary-text text-[10px]">■</span> Anomaly Detection</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Analytics & Tools Card -->
+                    <div class="glass-card p-6 rounded-xl flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-title-md text-[18px] text-on-background mb-4 border-b border-outline-variant/10 pb-2 font-bold tracking-wide">BI &amp; Operations</h3>
+                            <ul class="font-body-md text-body-md text-on-surface-variant space-y-3 font-medium text-[13px]">
+                                <li class="flex items-center gap-2"><span class="text-tertiary text-[10px]">■</span> Power BI / Tableau</li>
+                                <li class="flex items-center gap-2"><span class="text-tertiary text-[10px]">■</span> Excel Pivot Tables</li>
+                                <li class="flex items-center gap-2"><span class="text-tertiary text-[10px]">■</span> HIPAA Security Design</li>
+                                <li class="flex items-center gap-2"><span class="text-tertiary text-[10px]">■</span> Data Validation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vayu Section (North-West - Opportunities & Contact) -->
+        <section class="mb-section-gap scroll-reveal" id="vayu">
+            <!-- Part A: Work Experience -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-16">
+                <div class="md:col-span-4 flex flex-col justify-start">
+                    <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-4">Work Experience</h2>
+                    <p class="font-label-sm text-label-sm text-primary tracking-widest uppercase mb-6 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-secondary inline-block animate-pulse"></span>
+                        Proven Track Record
+                    </p>
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-sm mb-6">
+                        Professional engineering and analytics roles focused on automating workflows, auditing complex databases, and improving operational metrics.
+                    </p>
+                </div>
+                
+                <div class="md:col-span-8 flex flex-col gap-6">
+                    <!-- Experience Card 1 -->
+                    <div class="glass-card p-6 md:p-8 rounded-xl floating" style="animation-delay: 0s;">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+                            <div>
+                                <h3 class="font-title-md text-title-md text-on-background font-bold">Student Office Assistant</h3>
+                                <div class="font-label-sm text-label-sm text-primary tracking-wide mt-1 uppercase font-bold">Dean of Students Office, YSU</div>
+                            </div>
+                            <span class="self-start md:self-center font-label-sm text-[11px] bg-primary/10 text-primary border border-primary/30 px-3.5 py-1 rounded-full uppercase tracking-wider font-bold">
+                                2025 — Present
+                            </span>
+                        </div>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+                            Spearheaded internal workflow automations leveraging LLMs and prompt engineering, significantly reducing manual data Entry cycles. Supervised inventory tracking operations for the campus food pantry.
+                        </p>
+                        <ul class="space-y-3 font-body-md text-[14px] text-on-surface-variant/90 border-t border-outline-variant/10 pt-4">
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-primary mt-1">■</span>
+                                <span><strong>Workflow Automation:</strong> Designed and ran custom AI assistants to automate daily documentation routing, saving hours of weekly operational load.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-primary mt-1">■</span>
+                                <span><strong>Database Integrity:</strong> Audited and optimized the pantry inventory database, tracking 1,000+ items with zero discrepancies.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-primary mt-1">■</span>
+                                <span><strong>Technical Support:</strong> Managed hardware/software configurations and resolved system administration issues for office personnel.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Experience Card 2 -->
+                    <div class="glass-card p-6 md:p-8 rounded-xl floating" style="animation-delay: 0.5s;">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
+                            <div>
+                                <h3 class="font-title-md text-title-md text-on-background font-bold">Data Analyst</h3>
+                                <div class="font-label-sm text-label-sm text-secondary-text tracking-wide mt-1 uppercase font-bold">SEBAC Nepal</div>
+                            </div>
+                            <span class="self-start md:self-center font-label-sm text-[11px] bg-secondary/15 text-secondary-text border border-secondary/30 px-3.5 py-1 rounded-full uppercase tracking-wider font-bold">
+                                2024
+                            </span>
+                        </div>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-4 leading-relaxed">
+                            Led validation and analysis of complex program databases to support remote field auditing. Built analytics assets to improve operational reporting speeds.
+                        </p>
+                        <ul class="space-y-3 font-body-md text-[14px] text-on-surface-variant/90 border-t border-outline-variant/10 pt-4">
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-secondary-text mt-1">■</span>
+                                <span><strong>Rigorous Auditing:</strong> Checked 500+ records via SQL and Excel, resolving severe duplicate reporting anomalies.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-secondary-text mt-1">■</span>
+                                <span><strong>Operational Dashboards:</strong> Engineered Power BI and Tableau dashboards to track field benchmarks, cutting reporting lag by 20%.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <span class="text-secondary-text mt-1">■</span>
+                                <span><strong>Data Cleaning:</strong> Wrote Excel Power Query and SQL scripts to filter noise out of program databases.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Part B: Contact Gateway Form -->
+            <div id="contact">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 border-b border-outline-variant/10 pb-4">
+                    <div>
+                        <h3 class="font-title-md text-[22px] font-bold text-on-background">Get In Touch</h3>
+                        <p class="font-label-sm text-label-sm text-tertiary tracking-widest uppercase mt-1">
+                            Establish Connection
+                        </p>
+                    </div>
+                </div>
+                <div class="glass-card p-8 rounded-xl">
+                    <form class="space-y-6" onsubmit="event.preventDefault(); alert('Message transmitted across cosmic frequencies.');">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block font-label-sm text-label-sm text-primary uppercase mb-2">Your Name</label>
+                                <input type="text" class="w-full input-bg border-b border-outline-variant/30 focus:border-primary text-on-background px-4 py-3 outline-none transition-colors rounded-none" placeholder="e.g. Hiring Manager" required>
+                            </div>
+                            <div>
+                                <label class="block font-label-sm text-label-sm text-primary uppercase mb-2">Email Address</label>
+                                <input type="email" class="w-full input-bg border-b border-outline-variant/30 focus:border-primary text-on-background px-4 py-3 outline-none transition-colors rounded-none" placeholder="e.g. partner@agency.com" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block font-label-sm text-label-sm text-primary uppercase mb-2">Project Details / Message</label>
+                            <textarea rows="4" class="w-full input-bg border-b border-outline-variant/30 focus:border-primary text-on-background px-4 py-3 outline-none transition-colors rounded-none" placeholder="Describe your project, role, or opportunity..." required></textarea>
+                        </div>
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-4">
+                            <button type="submit" class="bg-primary text-background font-label-sm text-label-sm font-bold px-8 py-4 rounded hover:bg-primary/90 transition-all shadow-primary-glow">
+                                Transmit Signal
+                            </button>
+                            <div class="flex gap-6 items-center">
+                                <a href="mailto:prabinkhadka1396@gmail.com" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5"><span class="material-symbols-outlined text-[20px]">contact_page</span> <span class="font-label-sm text-[10px] tracking-widest uppercase">Email</span></a>
+                                <a href="https://github.com/MLucifer13" target="_blank" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5"><span class="material-symbols-outlined text-[20px]">code</span> <span class="font-label-sm text-[10px] tracking-widest uppercase">Github</span></a>
+                                <a href="https://www.linkedin.com/in/prabinkc13/" target="_blank" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1.5"><span class="material-symbols-outlined text-[20px]">group</span> <span class="font-label-sm text-[10px] tracking-widest uppercase">LinkedIn</span></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-12 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center border-t border-outline-variant/10 footer-bg backdrop-blur-md relative z-10">
+        <div class="font-label-sm text-label-sm uppercase tracking-widest text-primary mb-6 md:mb-0 font-bold select-none">
+            PRABIN KC
+        </div>
+        <div class="flex flex-wrap justify-center gap-6 mb-6 md:mb-0 select-none">
+            <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#hero">Home</a>
+            <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#wisdom">Education</a>
+            <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#artifacts">Projects</a>
+            <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#nairutya">Skills</a>
+            <a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#vayu">Experience</a>
+        </div>
+        <div class="font-body-md text-[12px] text-on-surface-variant/50">
+            © 2026 PRABIN KC. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleIcon = document.getElementById('theme-toggle-icon');
+
+        function updateToggleIcon() {
+            const isDark = document.documentElement.classList.contains('dark');
+            if (isDark) {
+                themeToggleIcon.textContent = 'light_mode';
+            } else {
+                themeToggleIcon.textContent = 'dark_mode';
+            }
+        }
+
+        // Run initially to set the correct icon
+        updateToggleIcon();
+
+        themeToggleBtn.addEventListener('click', () => {
+            themeToggleIcon.style.transition = 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
+            themeToggleIcon.style.transform = 'rotate(180deg) scale(0)';
+            
+            setTimeout(() => {
+                const isDark = document.documentElement.classList.contains('dark');
+                if (isDark) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+                updateToggleIcon();
+                themeToggleIcon.style.transform = 'rotate(360deg) scale(1)';
+                
+                setTimeout(() => {
+                    themeToggleIcon.style.transition = 'none';
+                    themeToggleIcon.style.transform = 'none';
+                }, 250);
+            }, 250);
+        });
+
+        // Toggle mobile navigation overlay
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('translate-x-full')) {
+                menu.classList.remove('translate-x-full');
+                icon.textContent = 'close';
+            } else {
+                menu.classList.add('translate-x-full');
+                icon.textContent = 'menu';
+            }
+        }
+
+        // Intersection Observer for scroll reveal animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Advanced Starfield Background with subtle nebulae and auspicious constellations
+        const canvas = document.getElementById('starfieldCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+
+        function initParticles() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = [];
+            
+            // 1. Generate standard random background stars (increased brightness/size variety)
+            for (let i = 0; i < 300; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 1.6 + 0.2,
+                    vx: (Math.random() - 0.5) * 0.15,
+                    vy: (Math.random() - 0.5) * 0.15,
+                    alpha: Math.random(),
+                    dAlpha: (Math.random() * 0.018) - 0.009,
+                    color: Math.random() > 0.88 ? '#FFD700' : '#eae2cf', // golden solar stars
+                    isAuspicious: false
+                });
+            }
+
+            // 2. Inject Hasta Nakshatra (Corvus / The Hand - craftsmanship and developer skill)
+            const hastaX = width * 0.18;
+            const hastaY = height * 0.35;
+            const hastaVX = 0.03;
+            const hastaVY = 0.01;
+            const hastaStars = [
+                { dx: 0, dy: 0, r: 2.0, color: '#eae2cf', isAuspicious: true }, // Key star (Gienah)
+                { dx: 30, dy: 35, r: 1.4, color: '#eae2cf', isAuspicious: false },
+                { dx: -45, dy: 20, r: 1.6, color: '#eae2cf', isAuspicious: false },
+                { dx: -15, dy: 55, r: 1.5, color: '#eae2cf', isAuspicious: false },
+                { dx: 25, dy: -25, r: 1.8, color: '#FFD700', isAuspicious: true } // Golden star (Algorab)
+            ];
+            hastaStars.forEach(s => {
+                particles.push({
+                    x: hastaX + s.dx,
+                    y: hastaY + s.dy,
+                    radius: s.r,
+                    vx: hastaVX,
+                    vy: hastaVY,
+                    alpha: Math.random(),
+                    dAlpha: 0.008 + Math.random() * 0.006,
+                    color: s.color,
+                    isAuspicious: s.isAuspicious
+                });
+            });
+
+            // 3. Inject Abhijit Nakshatra (Lyra / Vega - victory, success and intellect)
+            const abhijitX = width * 0.78;
+            const abhijitY = height * 0.22;
+            const abhijitVX = 0.02;
+            const abhijitVY = -0.02;
+            const abhijitStars = [
+                { dx: 0, dy: 0, r: 2.8, color: '#79f5ff', isAuspicious: true }, // Vega (Ultra-bright blue-white star)
+                { dx: 18, dy: 25, r: 1.3, color: '#eae2cf', isAuspicious: false },
+                { dx: 42, dy: 25, r: 1.2, color: '#eae2cf', isAuspicious: false },
+                { dx: 54, dy: 45, r: 1.4, color: '#eae2cf', isAuspicious: false },
+                { dx: 30, dy: 45, r: 1.3, color: '#eae2cf', isAuspicious: false }
+            ];
+            abhijitStars.forEach(s => {
+                particles.push({
+                    x: abhijitX + s.dx,
+                    y: abhijitY + s.dy,
+                    radius: s.r,
+                    vx: abhijitVX,
+                    vy: abhijitVY,
+                    alpha: Math.random(),
+                    dAlpha: 0.006 + Math.random() * 0.008,
+                    color: s.color,
+                    isAuspicious: s.isAuspicious
+                });
+            });
+
+            // 4. Inject Shravana Nakshatra (Altair / Aquila - learning and career guidance)
+            const shravanaX = width * 0.52;
+            const shravanaY = height * 0.62;
+            const shravanaVX = -0.02;
+            const shravanaVY = 0.01;
+            const shravanaStars = [
+                { dx: 0, dy: 0, r: 2.4, color: '#fff6df', isAuspicious: true }, // Altair
+                { dx: -15, dy: -15, r: 1.3, color: '#eae2cf', isAuspicious: false },
+                { dx: 15, dy: 15, r: 1.4, color: '#eae2cf', isAuspicious: false }
+            ];
+            shravanaStars.forEach(s => {
+                particles.push({
+                    x: shravanaX + s.dx,
+                    y: shravanaY + s.dy,
+                    radius: s.r,
+                    vx: shravanaVX,
+                    vy: shravanaVY,
+                    alpha: Math.random(),
+                    dAlpha: 0.01 + Math.random() * 0.005,
+                    color: s.color,
+                    isAuspicious: s.isAuspicious
+                });
+            });
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, width, height);
+            
+            const isDark = document.documentElement.classList.contains('dark');
+            
+            // Subtle cosmic nebula ambient gradients
+            if (isDark) {
+                const gradient1 = ctx.createRadialGradient(width * 0.2, height * 0.4, 0, width * 0.2, height * 0.4, width * 0.6);
+                gradient1.addColorStop(0, 'rgba(255, 215, 0, 0.015)');
+                gradient1.addColorStop(1, 'transparent');
+                ctx.fillStyle = gradient1;
+                ctx.fillRect(0, 0, width, height);
+
+                const gradient2 = ctx.createRadialGradient(width * 0.8, height * 0.6, 0, width * 0.8, height * 0.6, width * 0.5);
+                gradient2.addColorStop(0, 'rgba(146, 7, 3, 0.015)');
+                gradient2.addColorStop(1, 'transparent');
+                ctx.fillStyle = gradient2;
+                ctx.fillRect(0, 0, width, height);
+            } else {
+                // Light mode nebula: extremely faint Google blue glow
+                const gradient1 = ctx.createRadialGradient(width * 0.3, height * 0.3, 0, width * 0.3, height * 0.3, width * 0.5);
+                gradient1.addColorStop(0, 'rgba(26, 115, 232, 0.012)');
+                gradient1.addColorStop(1, 'transparent');
+                ctx.fillStyle = gradient1;
+                ctx.fillRect(0, 0, width, height);
+            }
+
+            // Animate and draw stars
+            particles.forEach(p => {
+                let color = p.color;
+                let alphaMult = 1.0;
+                
+                if (!isDark) {
+                    if (p.color === '#FFD700') {
+                        color = '#ffb300'; // Vivid gold
+                    } else if (p.color === '#eae2cf') {
+                        color = '#ff9100'; // Vivid orange/gold
+                    } else if (p.color === '#79f5ff') {
+                        color = '#00b0ff'; // Vivid sky blue
+                    } else if (p.color === '#fff6df') {
+                        color = '#ffc107'; // Warm golden yellow
+                    } else {
+                        color = '#ffb300';
+                    }
+                    alphaMult = 0.7; // Moderate opacity for visibility on light bg
+                    
+                    // Draw soft outer glow
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius * 2.2, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
+                    ctx.globalAlpha = Math.abs(p.alpha) * alphaMult * 0.3;
+                    ctx.fill();
+                    
+                    // Draw solid core
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
+                    ctx.globalAlpha = Math.abs(p.alpha) * alphaMult * 0.85;
+                    ctx.fill();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
+                    ctx.globalAlpha = Math.abs(p.alpha) * alphaMult;
+                    ctx.fill();
+                }
+
+                // Draw premium diamond cross flares on bright auspicious stars
+                if (isDark && p.isAuspicious && p.radius >= 1.8 && p.alpha > 0.35) {
+                    ctx.strokeStyle = p.color;
+                    ctx.lineWidth = 0.55;
+                    ctx.globalAlpha = (p.alpha - 0.35) * 0.75;
+                    
+                    // Horizontal flare line
+                    ctx.beginPath();
+                    ctx.moveTo(p.x - p.radius * 3.5, p.y);
+                    ctx.lineTo(p.x + p.radius * 3.5, p.y);
+                    ctx.stroke();
+
+                    // Vertical flare line
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y - p.radius * 3.5);
+                    ctx.lineTo(p.x, p.y + p.radius * 3.5);
+                    ctx.stroke();
+                } else if (!isDark && p.isAuspicious && p.radius >= 1.8 && p.alpha > 0.35) {
+                    // Draw soft blue flare in light mode
+                    ctx.strokeStyle = '#00b0ff';
+                    ctx.lineWidth = 0.45;
+                    ctx.globalAlpha = (p.alpha - 0.35) * 0.35;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(p.x - p.radius * 2.5, p.y);
+                    ctx.lineTo(p.x + p.radius * 2.5, p.y);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y - p.radius * 2.5);
+                    ctx.lineTo(p.x, p.y + p.radius * 2.5);
+                    ctx.stroke();
+                }
+                
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha += p.dAlpha;
+
+                if (p.alpha > 1 || p.alpha < 0) p.dAlpha = -p.dAlpha;
+                
+                if (p.x < 0) p.x = width;
+                if (p.x > width) p.x = 0;
+                if (p.y < 0) p.y = height;
+                if (p.y > height) p.y = 0;
+            });
+            
+            ctx.globalAlpha = 1.0;
+            requestAnimationFrame(drawParticles);
+        }
+
+        window.addEventListener('resize', initParticles);
+        initParticles();
+        drawParticles();
+
+        // Procedural WebGL Glowing Sun Star Implementation
+        const threeContainer = document.getElementById('three-canvas-container');
+        if (threeContainer) {
+            const scene = new THREE.Scene();
+            
+            // Set up camera with full viewport aspect ratio
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            threeContainer.appendChild(renderer.domElement);
+
+            // Group to anchor all glowing sprites
+            const sunGroup = new THREE.Group();
+            scene.add(sunGroup);
+
+            // Procedural soft glow texture helper using HTML5 Canvas
+            function createGlowTexture() {
+                const canvas = document.createElement('canvas');
+                canvas.width = 128;
+                canvas.height = 128;
+                const ctx = canvas.getContext('2d');
+                const gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+                gradient.addColorStop(0.0, 'rgba(255, 255, 255, 1.0)');
+                gradient.addColorStop(0.15, 'rgba(255, 255, 255, 0.95)');
+                gradient.addColorStop(0.4, 'rgba(255, 255, 255, 0.4)');
+                gradient.addColorStop(0.7, 'rgba(255, 255, 255, 0.1)');
+                gradient.addColorStop(1.0, 'rgba(255, 255, 255, 0.0)');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 128, 128);
+                return new THREE.CanvasTexture(canvas);
+            }
+
+            const glowTexture = createGlowTexture();
+
+            // Layer 1: Core (Bright White-Hot Center)
+            const coreMaterial = new THREE.SpriteMaterial({ 
+                map: glowTexture, 
+                color: 0xffffff, 
+                blending: THREE.AdditiveBlending, 
+                transparent: true,
+                opacity: 1.0
+            });
+            const coreSprite = new THREE.Sprite(coreMaterial);
+            coreSprite.scale.set(4.2, 4.2, 1);
+            sunGroup.add(coreSprite);
+
+            // Layer 2: Corona (Bright Solar Gold Middle Ring)
+            const coronaMaterial = new THREE.SpriteMaterial({ 
+                map: glowTexture, 
+                color: 0xffaa00, 
+                blending: THREE.AdditiveBlending, 
+                transparent: true,
+                opacity: 0.95
+            });
+            const coronaSprite = new THREE.Sprite(coronaMaterial);
+            coronaSprite.scale.set(8.2, 8.2, 1);
+            sunGroup.add(coronaSprite);
+
+            // Layer 3: Outer Aura / Nebular Glow (Huge Soft Crimson Edge)
+            const outerMaterial = new THREE.SpriteMaterial({ 
+                map: glowTexture, 
+                color: 0xff3300, 
+                blending: THREE.AdditiveBlending, 
+                transparent: true,
+                opacity: 0.65
+            });
+            const outerSprite = new THREE.Sprite(outerMaterial);
+            outerSprite.scale.set(14.5, 14.5, 1);
+            sunGroup.add(outerSprite);
+
+            // Lighting setup
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
+            scene.add(ambientLight);
+            
+            const pointLight = new THREE.PointLight(0xFFD700, 3.0, 90);
+            pointLight.position.set(0, 0, 0);
+            scene.add(pointLight);
+            
+            camera.position.z = 10;
+
+            // Responsive bounds utility
+            function getVisibleBounds() {
+                const vFOV = THREE.MathUtils.degToRad(camera.fov);
+                const height = 2 * Math.tan(vFOV / 2) * camera.position.z;
+                const width = height * camera.aspect;
+                return { width, height };
+            }
+
+            // Catmull-Rom Spline for perfectly smooth and natural movements
+            const orbitCurve = new THREE.CatmullRomCurve3([
+                new THREE.Vector3(0.24, 0.0, 0.0),    // Brahmasthan / Hero
+                new THREE.Vector3(0.22, 0.22, -1.0),  // Northeast / Wisdom
+                new THREE.Vector3(0.24, -0.22, -0.5), // Southeast / Projects
+                new THREE.Vector3(-0.22, -0.16, -2.0),// Southwest / Skills
+                new THREE.Vector3(-0.25, 0.20, 0.0)   // Northwest / Contact
+            ]);
+
+            // Telemetry metadata keyframes (Vastu Aligned - Warm Solar Palette)
+            const colorKeyframes = [
+                { t: 0.0,  glow: 1.0, r: 0xff, g: 0xaa, b: 0x00, dir: "Intro", elem: "AI-Native Builder", desc: "Prabin KC: YSU Computer Science" },
+                { t: 0.25, glow: 0.85, r: 0xff, g: 0xd7, b: 0x00, dir: "Education", elem: "Academic Foundations", desc: "CS50 & DataCamp Certifications" },
+                { t: 0.50, glow: 1.35, r: 0xff, g: 0x33, b: 0x00, dir: "Projects", elem: "Technical Projects", desc: "Clinical SaaS & Analytics Pipelines" },
+                { t: 0.75, glow: 0.75, r: 0xff, g: 0xaa, b: 0x00, dir: "Skills", elem: "Core Expertise", desc: "Python, SQL, React & FastAPI" },
+                { t: 1.0,  glow: 1.15, r: 0xff, g: 0x88, b: 0x00, dir: "Experience", elem: "Career & Contact", desc: "Dean of Students IT & SEBAC Nepal" }
+            ];
+
+            // Interpolation engine for telemetry, needle angle, and light colors
+            function interpolateState(t) {
+                if (t <= 0) return colorKeyframes[0];
+                if (t >= 1) return colorKeyframes[colorKeyframes.length - 1];
+                
+                let i = 0;
+                while (i < colorKeyframes.length - 1 && t > colorKeyframes[i+1].t) {
+                    i++;
+                }
+                
+                const k1 = colorKeyframes[i];
+                const k2 = colorKeyframes[i+1];
+                const ratio = (t - k1.t) / (k2.t - k1.t);
+                const ease = ratio * ratio * (3 - 2 * ratio);
+                
+                const angles = [0, 45, 135, 225, 315];
+                const needleAngle = angles[i] + (angles[i+1] - angles[i]) * ease;
+                
+                return {
+                    glow: k1.glow + (k2.glow - k1.glow) * ease,
+                    r: k1.r + (k2.r - k1.r) * ease,
+                    g: k1.g + (k2.g - k1.g) * ease,
+                    b: k1.b + (k2.b - k1.b) * ease,
+                    dir: t < 0.12 ? "Intro" : (t < 0.38 ? "Education" : (t < 0.63 ? "Projects" : (t < 0.88 ? "Skills" : "Experience"))),
+                    elem: t < 0.12 ? "AI-Native Builder" : (t < 0.38 ? "Academic Foundations" : (t < 0.63 ? "Technical Projects" : (t < 0.88 ? "Core Expertise" : "Career & Contact"))),
+                    desc: t < 0.12 ? "Prabin KC: YSU Computer Science" : (t < 0.38 ? "CS50 & DataCamp Certifications" : (t < 0.63 ? "Clinical SaaS & Analytics Pipelines" : (t < 0.88 ? "Python, SQL, React & FastAPI" : "Dean of Students IT & SEBAC Nepal"))),
+                    needleAngle: needleAngle
+                };
+            }
+
+            // Mouse position parallax tracking
+            let mouseX = 0, mouseY = 0;
+            let targetMouseX = 0, targetMouseY = 0;
+
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX - window.innerWidth / 2) / window.innerWidth;
+                mouseY = (event.clientY - window.innerHeight / 2) / window.innerHeight;
+            });
+
+            // Scroll percentage tracking with smoothing interpolation
+            let targetScrollPercent = 0;
+            let currentScrollPercent = 0;
+
+            function updateScroll() {
+                const docHeight = document.documentElement.scrollHeight;
+                const winHeight = window.innerHeight;
+                const maxScroll = docHeight - winHeight;
+                targetScrollPercent = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+            }
+            window.addEventListener('scroll', updateScroll);
+            updateScroll();
+
+            // Query glass card elements once for Google-style reveal lighting
+            const glowCards = document.querySelectorAll('.glass-card');
+
+            // Set up hover tracking attributes once
+            glowCards.forEach(card => {
+                card.addEventListener('mouseenter', () => card.dataset.hovered = 'true');
+                card.addEventListener('mouseleave', () => delete card.dataset.hovered);
+            });
+
+            // Main rendering animation loop
+            let time = 0;
+            let lastThemeWasDark = null;
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                time += 0.01;
+
+                // Smooth scroll lerping for butter-soft movement
+                currentScrollPercent += (targetScrollPercent - currentScrollPercent) * 0.045;
+
+                // Slowly rotate corona texture for active solar movement
+                coronaMaterial.rotation = -time * 0.025;
+
+                // Toggle blending and parameters when theme changes
+                const isDark = document.documentElement.classList.contains('dark');
+                if (lastThemeWasDark !== isDark) {
+                    lastThemeWasDark = isDark;
+                    if (isDark) {
+                        coreMaterial.blending = THREE.AdditiveBlending;
+                        coreMaterial.opacity = 1.0;
+                        coreMaterial.needsUpdate = true;
+
+                        coronaMaterial.blending = THREE.AdditiveBlending;
+                        coronaMaterial.opacity = 0.95;
+                        coronaMaterial.color.setHex(0xffaa00);
+                        coronaMaterial.needsUpdate = true;
+
+                        outerMaterial.blending = THREE.AdditiveBlending;
+                        outerMaterial.opacity = 0.65;
+                        outerMaterial.needsUpdate = true;
+                        
+                        ambientLight.intensity = 0.45;
+                        pointLight.intensity = 3.0;
+                    } else {
+                        coreMaterial.blending = THREE.AdditiveBlending;
+                        coreMaterial.opacity = 0.7;  // slightly reduced from dark's 1.0
+                        coreMaterial.needsUpdate = true;
+
+                        coronaMaterial.blending = THREE.AdditiveBlending;
+                        coronaMaterial.opacity = 0.7;
+                        coronaMaterial.color.setHex(0xffaa00);
+                        coronaMaterial.needsUpdate = true;
+
+                        outerMaterial.blending = THREE.AdditiveBlending;
+                        outerMaterial.opacity = 0.45;  // reduced but still visible
+                        outerMaterial.needsUpdate = true;
+
+                        ambientLight.intensity = 0.75;
+                        pointLight.intensity = 1.5;
+                    }
+                }
+
+                // Retrieve Vastu telemetry
+                const state = interpolateState(currentScrollPercent);
+
+                // Update Vastu HUD Telemetry DOM
+                const compassNeedle = document.getElementById('compass-needle');
+                const compassDir = document.getElementById('vastu-direction-name');
+                const compassElem = document.getElementById('vastu-element-name');
+                const compassDesc = document.getElementById('vastu-direction-desc');
+                
+                if (compassNeedle) compassNeedle.style.transform = `rotate(${state.needleAngle}deg)`;
+                if (compassDir) compassDir.textContent = state.dir;
+                if (compassElem) compassElem.textContent = state.elem;
+                if (compassDesc) compassDesc.textContent = state.desc;
+
+                // Get coordinates along the Catmull-Rom Spline
+                const curvePoint = orbitCurve.getPointAt(currentScrollPercent);
+                const bounds = getVisibleBounds();
+                
+                const isMobile = window.innerWidth < 768;
+                const xMult = isMobile ? 0.6 : 1.0;
+                
+                const targetX = curvePoint.x * bounds.width * xMult;
+                const targetY = curvePoint.y * bounds.height;
+                const targetZ = curvePoint.z;
+
+                // Lerp mouse positions for parallax lag
+                targetMouseX += (mouseX - targetMouseX) * 0.05;
+                targetMouseY += (mouseY - targetMouseY) * 0.05;
+
+                // Place the Sun directly on the smooth spline curve, plus the mouse parallax
+                sunGroup.position.x = targetX + targetMouseX * 1.5;
+                sunGroup.position.y = targetY - targetMouseY * 1.5;
+                sunGroup.position.z = targetZ;
+
+                // Calculate Sun screen coordinates in pixels to drive the Google-style box border lighting
+                const tempV = new THREE.Vector3();
+                tempV.copy(sunGroup.position);
+                tempV.project(camera); // map to NDC [-1, 1] range
+                
+                const sunScreenX = (tempV.x * 0.5 + 0.5) * window.innerWidth;
+                const sunScreenY = (1.0 - (tempV.y * 0.5 + 0.5)) * window.innerHeight;
+                
+                glowCards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const sunXRelative = sunScreenX - rect.left;
+                    const sunYRelative = sunScreenY - rect.top;
+                    card.style.setProperty('--sun-x', `${sunXRelative}px`);
+                    card.style.setProperty('--sun-y', `${sunYRelative}px`);
+
+                    // 1. Get the card's center in screen space:
+                    const cardCenterX = rect.left + rect.width / 2;
+                    const cardCenterY = rect.top + rect.height / 2;
+
+                    // 2. Get the vector from card center TO the sun:
+                    const dx = sunScreenX - cardCenterX;
+                    const dy = sunScreenY - cardCenterY;
+
+                    // 3. Calculate distance and a proximity intensity (stronger when closer):
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const maxDist = 600;
+                    const intensity = Math.max(0, 1 - dist / maxDist);
+                    if (intensity < 0.01) {
+                        card.style.boxShadow = '';
+                        return;
+                    }
+
+                    // 4. Normalize the direction vector and scale to a small offset:
+                    const nx = dx / dist;
+                    const ny = dy / dist;
+                    const offsetX = nx * 6 * intensity;
+                    const offsetY = ny * 6 * intensity;
+                    
+                    const isHovered = card.dataset.hovered === 'true';
+                    const alpha = isHovered
+                        ? (0.45 + 0.35 * intensity).toFixed(2)   // strong on hover
+                        : (0.06 + 0.14 * intensity).toFixed(2);  // subtle at rest
+                    const blur = isHovered ? (24 + 14 * intensity) : (12 + 8 * intensity);
+                    const spread = -4;
+
+                    // 5. Pick the glow color based on the sun's ACTUAL current color:
+                    const color = `rgba(${Math.round(state.r)}, ${Math.round(state.g)}, ${Math.round(state.b)}, ${alpha})`;
+
+                    // 6. Apply as box-shadow:
+                    card.style.boxShadow = `${offsetX}px ${offsetY}px ${blur}px ${spread}px ${color}`;
+                });
+
+                // Maintain constant scale across sections with a tiny organic pulse (breathe)
+                const pulse = 1.0 + Math.sin(time * 2.0) * 0.025;
+                const mobileScaleFactor = isMobile ? 0.75 : 1.0;
+                const finalScale = 1.0 * pulse * mobileScaleFactor;
+                sunGroup.scale.set(finalScale, finalScale, finalScale);
+
+                // Re-position point light to track Sun coordinates
+                pointLight.position.copy(sunGroup.position);
+                
+                // Dynamically color outer ring & lights according to Vastu fire states
+                const hexColor = (Math.round(state.r) << 16) + (Math.round(state.g) << 8) + Math.round(state.b);
+                outerMaterial.color.setHex(hexColor);
+                pointLight.color.setHex(hexColor);
+                
+                // Sync outer aura size with the state glow factor (denser & larger)
+                const auraSize = 14.5 * state.glow + Math.sin(time * 1.5) * 0.45;
+                outerSprite.scale.set(auraSize, auraSize, 1);
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // Resize viewport handler
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            });
+        }
+    </script>
+</body>
+</html>
